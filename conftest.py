@@ -27,10 +27,11 @@ def data_fixture_js():
 
 
 @pytest.fixture
-def delete_address():
-    addresses_to_delete = {}
-    yield addresses_to_delete
-    for address, headers in addresses_to_delete.items():
+def delete_address(data_fixture_js):
+    data_fixture_js["addresses_to_delete"] = {}
+    yield data_fixture_js["addresses_to_delete"]
+    breakpoint()
+    for address, headers in data_fixture_js["addresses_to_delete"].items():
         requests.delete(address, headers=headers)
 
 
