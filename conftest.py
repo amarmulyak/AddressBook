@@ -21,11 +21,10 @@ def browser_fixture():
 def data_fixture_js():
     cur_path = pathlib.Path(__file__).parent
     # json_file = open(f'{cur_path}\\test_input_data\\qa.json')
-    #     # json_file = open(f'{cur_path}/test_input_data/qa.json')
-    #     # breakpoint()
-    path = os_json_path()
-    file_path = f'{cur_path}{path}'
-    json_file = open(file_path)
+    json_file = open(f'{cur_path}/test_input_data/qa.json')
+    # path = os_json_path()
+    # file_path = f'{cur_path}{path}'
+    # json_file = open(file_path)
     data_from_file = json.load(json_file)
     yield data_from_file
     json_file.close()
@@ -43,10 +42,10 @@ def pytest_generate_tests(metafunc):
     if "data_gen" in metafunc.fixturenames:
         cur_path = pathlib.Path(__file__).parent
         # file = open(f'{cur_path}\\test_input_data\\qa.json')
-        # file = open(f'{cur_path}/test_input_data/qa.json')
-        path = os_json_path()
-        file_path = f'{cur_path}{path}'
-        file = open(file_path)
+        file = open(f'{cur_path}/test_input_data/qa.json')
+        # path = os_json_path()
+        # file_path = f'{cur_path}{path}'
+        # file = open(file_path)
         data = [json.load(file)]
         metafunc.parametrize("data_gen", [
             data[0]["address_negative"]["p1"],
@@ -58,8 +57,8 @@ def pytest_generate_tests(metafunc):
 def os_json_path():
     os_path = os.environ.get("PATH")
     if "\\" in os_path:
-        # path = "\\test_input_data\\qa.json"
-        path = "/test_input_data/qa.json"
+        path = "\\test_input_data\\qa.json"
+        # path = "/test_input_data/qa.json"
     else:
         path = "/test_input_data/qa.json"
     return path
