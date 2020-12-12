@@ -6,15 +6,11 @@ from pages.new_address_object import NewAddressLocators as NAL
 
 
 class TestAddAddressNegative:
-
     def test_error_required_fields_blank(
-            self,
-            browser_fixture,
-            data_fixture_js,
-            data_gen
+        self, browser_fixture, data_fixture_js, data_gen
     ):
-        session_email = data_fixture_js["session_email"]
-        session_password = data_fixture_js["session_password"]
+        session_email = data_fixture_js["session_email2"]
+        session_password = data_fixture_js["session_password2"]
         page = SignInSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)
         addresses = AddressesListPage(browser_fixture)
@@ -28,37 +24,28 @@ class TestAddAddressNegative:
         addresses.click_new_address_link()
 
         new_address_page.set_data_to_field(
-            NAL.locator_first_name_field,
-            data_gen['test_input']['first_name']
+            NAL.locator_first_name_field, data_gen["test_input"]["first_name"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_last_name_field,
-            data_gen['test_input']["last_name"]
+            NAL.locator_last_name_field, data_gen["test_input"]["last_name"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_address1_field,
-            data_gen['test_input']["address1"]
+            NAL.locator_address1_field, data_gen["test_input"]["address1"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_city,
-            data_gen['test_input']["city"]
+            NAL.locator_city, data_gen["test_input"]["city"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_zip_code,
-            data_gen['test_input']["zip_code"]
+            NAL.locator_zip_code, data_gen["test_input"]["zip_code"]
         )
 
-        new_address_page.click_on_element(
-            NAL.locator_create_address_btn
-        )
+        new_address_page.click_on_element(NAL.locator_create_address_btn)
 
-        error_message = common.get_text_from_element(
-            NAL.locator_required_fields_error
-        )
+        error_message = common.get_text_from_element(NAL.locator_required_fields_error)
         assert error_message == data_gen["expected"]
 
         common.click_sign_out()
