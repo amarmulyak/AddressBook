@@ -33,102 +33,88 @@ class TestAddAddress:
 
         new_address_page.set_data_to_field(
             NAL.locator_first_name_field,
-            data_fixture_js["dict_add_address"]["First name:"]
+            data_fixture_js["dict_add_address"]["First name:"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_last_name_field,
-            data_fixture_js["dict_add_address"]["Last name:"]
+            data_fixture_js["dict_add_address"]["Last name:"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_address1_field,
-            data_fixture_js["dict_add_address"]["Street Address:"]
+            data_fixture_js["dict_add_address"]["Street Address:"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_address2_field,
-            data_fixture_js["dict_add_address"]["Secondary Address:"]
+            data_fixture_js["dict_add_address"]["Secondary Address:"],
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_city,
-            data_fixture_js["dict_add_address"]["City:"]
+            NAL.locator_city, data_fixture_js["dict_add_address"]["City:"]
         )
 
         new_address_page.select_dropdown_option(
-            NAL.locator_state,
-            data_fixture_js["dict_add_address"]["State:"]
+            NAL.locator_state, data_fixture_js["dict_add_address"]["State:"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_zip_code,
-            data_fixture_js["dict_add_address"]["Zip code:"]
+            NAL.locator_zip_code, data_fixture_js["dict_add_address"]["Zip code:"]
         )
 
-        new_address_page.select_state(
-            data_fixture_js["dict_add_address"]["Country:"]
-        )
+        new_address_page.select_state(data_fixture_js["dict_add_address"]["Country:"])
 
         new_address_page.set_data_to_field(
             NAL.locator_birthday,
-            converter.date_converter(
-                data_fixture_js["dict_add_address"]["Birthday:"]
-            )
+            converter.date_converter(data_fixture_js["dict_add_address"]["Birthday:"]),
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_color,
-            converter.rgb_to_hex(
-                data_fixture_js["dict_add_address"]["Color:"]
-            )
+            converter.rgb_to_hex(data_fixture_js["dict_add_address"]["Color:"]),
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_age,
-            data_fixture_js["dict_add_address"]["Age:"]
+            NAL.locator_age, data_fixture_js["dict_add_address"]["Age:"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_website,
-            data_fixture_js["dict_add_address"]["Website:"]
+            NAL.locator_website, data_fixture_js["dict_add_address"]["Website:"]
         )
 
-        new_address_page.find_element(NAL.locator_picture)\
-            .send_keys("C:\\123.png")
+        new_address_page.find_element(NAL.locator_picture).send_keys("C:\\123.png")
 
         new_address_page.set_data_to_field(
-            NAL.locator_phone,
-            data_fixture_js["dict_add_address"]["Phone:"]
+            NAL.locator_phone, data_fixture_js["dict_add_address"]["Phone:"]
         )
 
         new_address_page.click_on_element_if_yes(
-            NAL.locator_climbing,
-            data_fixture_js["dict_add_address"]["Climbing?"]
+            NAL.locator_climbing, data_fixture_js["dict_add_address"]["Climbing?"]
         )
 
         new_address_page.click_on_element_if_yes(
-            NAL.locator_dancing,
-            data_fixture_js["dict_add_address"]["Dancing?"]
+            NAL.locator_dancing, data_fixture_js["dict_add_address"]["Dancing?"]
         )
 
         new_address_page.click_on_element_if_yes(
-            NAL.locator_reading,
-            data_fixture_js["dict_add_address"]["Reading?"]
+            NAL.locator_reading, data_fixture_js["dict_add_address"]["Reading?"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_note,
-            data_fixture_js["dict_add_address"]["Note:"]
+            NAL.locator_note, data_fixture_js["dict_add_address"]["Note:"]
         )
 
         new_address_page.click_create_address_btn()
 
         dict_results = show_address_page.get_results_shown()
 
-        assert show_address_page.find_element(
-            SAL.locator_result_container).text.split('\n')[0]\
-               == "Address was successfully created."
+        assert (
+            show_address_page.find_element(SAL.locator_result_container).text.split(
+                "\n"
+            )[0]
+            == "Address was successfully created."
+        )
 
         assert data_fixture_js["dict_add_address"] == dict_results
 
@@ -163,93 +149,76 @@ class TestShowAddress:
 
         new_address_page.set_data_to_field(
             NAL.locator_first_name_field,
-            data_fixture_js["dict_add_address"]["First name:"]
+            data_fixture_js["dict_add_address"]["First name:"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_last_name_field,
-            data_fixture_js["dict_add_address"]["Last name:"]
+            data_fixture_js["dict_add_address"]["Last name:"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_address1_field,
-            data_fixture_js["dict_add_address"]["Street Address:"]
+            data_fixture_js["dict_add_address"]["Street Address:"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_address2_field,
-            data_fixture_js["dict_add_address"]["Secondary Address:"]
+            data_fixture_js["dict_add_address"]["Secondary Address:"],
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_city,
-            data_fixture_js["dict_add_address"]["City:"]
+            NAL.locator_city, data_fixture_js["dict_add_address"]["City:"]
         )
 
         new_address_page.select_dropdown_option(
-            NAL.locator_state,
-            data_fixture_js["dict_add_address"]["State:"]
+            NAL.locator_state, data_fixture_js["dict_add_address"]["State:"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_zip_code,
-            data_fixture_js["dict_add_address"]["Zip code:"]
+            NAL.locator_zip_code, data_fixture_js["dict_add_address"]["Zip code:"]
         )
 
-        new_address_page.select_state(
-            data_fixture_js["dict_add_address"]["Country:"]
-        )
+        new_address_page.select_state(data_fixture_js["dict_add_address"]["Country:"])
 
         new_address_page.set_data_to_field(
             NAL.locator_birthday,
-            converter.date_converter(
-                data_fixture_js["dict_add_address"]["Birthday:"]
-            )
+            converter.date_converter(data_fixture_js["dict_add_address"]["Birthday:"]),
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_color,
-            converter.rgb_to_hex(
-                data_fixture_js["dict_add_address"]["Color:"]
-            )
+            converter.rgb_to_hex(data_fixture_js["dict_add_address"]["Color:"]),
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_age,
-            data_fixture_js["dict_add_address"]["Age:"]
+            NAL.locator_age, data_fixture_js["dict_add_address"]["Age:"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_website,
-            data_fixture_js["dict_add_address"]["Website:"]
+            NAL.locator_website, data_fixture_js["dict_add_address"]["Website:"]
         )
 
-        new_address_page.find_element(NAL.locator_picture) \
-            .send_keys("C:\\123.png")
+        new_address_page.find_element(NAL.locator_picture).send_keys("C:\\123.png")
 
         new_address_page.set_data_to_field(
-            NAL.locator_phone,
-            data_fixture_js["dict_add_address"]["Phone:"]
+            NAL.locator_phone, data_fixture_js["dict_add_address"]["Phone:"]
         )
 
         new_address_page.click_on_element_if_yes(
-            NAL.locator_climbing,
-            data_fixture_js["dict_add_address"]["Climbing?"]
+            NAL.locator_climbing, data_fixture_js["dict_add_address"]["Climbing?"]
         )
 
         new_address_page.click_on_element_if_yes(
-            NAL.locator_dancing,
-            data_fixture_js["dict_add_address"]["Dancing?"]
+            NAL.locator_dancing, data_fixture_js["dict_add_address"]["Dancing?"]
         )
 
         new_address_page.click_on_element_if_yes(
-            NAL.locator_reading,
-            data_fixture_js["dict_add_address"]["Reading?"]
+            NAL.locator_reading, data_fixture_js["dict_add_address"]["Reading?"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_note,
-            data_fixture_js["dict_add_address"]["Note:"]
+            NAL.locator_note, data_fixture_js["dict_add_address"]["Note:"]
         )
 
         new_address_page.click_create_address_btn()
@@ -294,93 +263,76 @@ class TestEditAddress:
 
         new_address_page.set_data_to_field(
             NAL.locator_first_name_field,
-            data_fixture_js["dict_add_address"]["First name:"]
+            data_fixture_js["dict_add_address"]["First name:"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_last_name_field,
-            data_fixture_js["dict_add_address"]["Last name:"]
+            data_fixture_js["dict_add_address"]["Last name:"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_address1_field,
-            data_fixture_js["dict_add_address"]["Street Address:"]
+            data_fixture_js["dict_add_address"]["Street Address:"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_address2_field,
-            data_fixture_js["dict_add_address"]["Secondary Address:"]
+            data_fixture_js["dict_add_address"]["Secondary Address:"],
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_city,
-            data_fixture_js["dict_add_address"]["City:"]
+            NAL.locator_city, data_fixture_js["dict_add_address"]["City:"]
         )
 
         new_address_page.select_dropdown_option(
-            NAL.locator_state,
-            data_fixture_js["dict_add_address"]["State:"]
+            NAL.locator_state, data_fixture_js["dict_add_address"]["State:"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_zip_code,
-            data_fixture_js["dict_add_address"]["Zip code:"]
+            NAL.locator_zip_code, data_fixture_js["dict_add_address"]["Zip code:"]
         )
 
-        new_address_page.select_state(
-            data_fixture_js["dict_add_address"]["Country:"]
-        )
+        new_address_page.select_state(data_fixture_js["dict_add_address"]["Country:"])
 
         new_address_page.set_data_to_field(
             NAL.locator_birthday,
-            converter.date_converter(
-                data_fixture_js["dict_add_address"]["Birthday:"]
-            )
+            converter.date_converter(data_fixture_js["dict_add_address"]["Birthday:"]),
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_color,
-            converter.rgb_to_hex(
-                data_fixture_js["dict_add_address"]["Color:"]
-            )
+            converter.rgb_to_hex(data_fixture_js["dict_add_address"]["Color:"]),
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_age,
-            data_fixture_js["dict_add_address"]["Age:"]
+            NAL.locator_age, data_fixture_js["dict_add_address"]["Age:"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_website,
-            data_fixture_js["dict_add_address"]["Website:"]
+            NAL.locator_website, data_fixture_js["dict_add_address"]["Website:"]
         )
 
-        new_address_page.find_element(NAL.locator_picture) \
-            .send_keys("C:\\123.png")
+        new_address_page.find_element(NAL.locator_picture).send_keys("C:\\123.png")
 
         new_address_page.set_data_to_field(
-            NAL.locator_phone,
-            data_fixture_js["dict_add_address"]["Phone:"]
+            NAL.locator_phone, data_fixture_js["dict_add_address"]["Phone:"]
         )
 
         new_address_page.click_on_element_if_yes(
-            NAL.locator_climbing,
-            data_fixture_js["dict_add_address"]["Climbing?"]
+            NAL.locator_climbing, data_fixture_js["dict_add_address"]["Climbing?"]
         )
 
         new_address_page.click_on_element_if_yes(
-            NAL.locator_dancing,
-            data_fixture_js["dict_add_address"]["Dancing?"]
+            NAL.locator_dancing, data_fixture_js["dict_add_address"]["Dancing?"]
         )
 
         new_address_page.click_on_element_if_yes(
-            NAL.locator_reading,
-            data_fixture_js["dict_add_address"]["Reading?"]
+            NAL.locator_reading, data_fixture_js["dict_add_address"]["Reading?"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_note,
-            data_fixture_js["dict_add_address"]["Note:"]
+            NAL.locator_note, data_fixture_js["dict_add_address"]["Note:"]
         )
 
         new_address_page.click_create_address_btn()
@@ -402,101 +354,88 @@ class TestEditAddress:
 
         edit_address_page.set_data_to_field(
             EAL.locator_first_name_field,
-            data_fixture_js["dict_edit_address"]["First name:"]
+            data_fixture_js["dict_edit_address"]["First name:"],
         )
 
         edit_address_page.set_data_to_field(
             EAL.locator_last_name_field,
-            data_fixture_js["dict_edit_address"]["Last name:"]
+            data_fixture_js["dict_edit_address"]["Last name:"],
         )
 
         edit_address_page.set_data_to_field(
             EAL.locator_address1_field,
-            data_fixture_js["dict_edit_address"]["Street Address:"]
+            data_fixture_js["dict_edit_address"]["Street Address:"],
         )
 
         edit_address_page.set_data_to_field(
             EAL.locator_address2_field,
-            data_fixture_js["dict_edit_address"]["Secondary Address:"]
+            data_fixture_js["dict_edit_address"]["Secondary Address:"],
         )
 
         edit_address_page.set_data_to_field(
-            EAL.locator_city,
-            data_fixture_js["dict_edit_address"]["City:"]
+            EAL.locator_city, data_fixture_js["dict_edit_address"]["City:"]
         )
 
         edit_address_page.select_dropdown_option(
-            EAL.locator_state,
-            data_fixture_js["dict_edit_address"]["State:"]
+            EAL.locator_state, data_fixture_js["dict_edit_address"]["State:"]
         )
 
         edit_address_page.set_data_to_field(
-            EAL.locator_zip_code,
-            data_fixture_js["dict_edit_address"]["Zip code:"]
+            EAL.locator_zip_code, data_fixture_js["dict_edit_address"]["Zip code:"]
         )
 
-        edit_address_page.select_state(
-            data_fixture_js["dict_edit_address"]["Country:"]
-        )
+        edit_address_page.select_state(data_fixture_js["dict_edit_address"]["Country:"])
 
         edit_address_page.set_data_to_field(
             EAL.locator_birthday,
-            converter.date_converter(
-                data_fixture_js["dict_edit_address"]["Birthday:"]
-            )
+            converter.date_converter(data_fixture_js["dict_edit_address"]["Birthday:"]),
         )
 
         edit_address_page.set_data_to_field(
             EAL.locator_color,
-            converter.rgb_to_hex(
-                data_fixture_js["dict_edit_address"]["Color:"]
-            )
+            converter.rgb_to_hex(data_fixture_js["dict_edit_address"]["Color:"]),
         )
 
         edit_address_page.set_data_to_field(
-            EAL.locator_age,
-            data_fixture_js["dict_edit_address"]["Age:"]
+            EAL.locator_age, data_fixture_js["dict_edit_address"]["Age:"]
         )
 
         edit_address_page.set_data_to_field(
-            EAL.locator_website,
-            data_fixture_js["dict_edit_address"]["Website:"]
+            EAL.locator_website, data_fixture_js["dict_edit_address"]["Website:"]
         )
 
         # addresses.find_element_by_locator(AL.locator_picture).send_keys("C:\\123.png")
 
         edit_address_page.set_data_to_field(
-            EAL.locator_phone,
-            data_fixture_js["dict_edit_address"]["Phone:"]
+            EAL.locator_phone, data_fixture_js["dict_edit_address"]["Phone:"]
         )
 
         edit_address_page.click_on_element_if_yes(
-            EAL.locator_climbing,
-            data_fixture_js["dict_edit_address"]["Climbing?"]
+            EAL.locator_climbing, data_fixture_js["dict_edit_address"]["Climbing?"]
         )
 
         edit_address_page.click_on_element_if_yes(
-            EAL.locator_dancing,
-            data_fixture_js["dict_edit_address"]["Dancing?"]
+            EAL.locator_dancing, data_fixture_js["dict_edit_address"]["Dancing?"]
         )
 
         edit_address_page.click_on_element_if_yes(
-            EAL.locator_reading,
-            data_fixture_js["dict_edit_address"]["Reading?"]
+            EAL.locator_reading, data_fixture_js["dict_edit_address"]["Reading?"]
         )
 
         edit_address_page.set_data_to_field(
-            EAL.locator_note,
-            data_fixture_js["dict_edit_address"]["Note:"]
+            EAL.locator_note, data_fixture_js["dict_edit_address"]["Note:"]
         )
 
         edit_address_page.click_update_address_btn()
 
         dict_results = show_address_page.get_results_shown()
 
-        assert show_address_page.find_element(
-            SAL.locator_result_container).text.split('\n')[0] \
-               == "Address was successfully updated."
+        assert (
+            show_address_page.find_element(SAL.locator_result_container).text.split(
+                "\n"
+            )[0]
+            == "Address was successfully updated."
+        )
 
         assert data_fixture_js["dict_edit_address"] == dict_results
 
@@ -531,93 +470,76 @@ class TestDestroyAddress:
 
         new_address_page.set_data_to_field(
             NAL.locator_first_name_field,
-            data_fixture_js["dict_add_address"]["First name:"]
+            data_fixture_js["dict_add_address"]["First name:"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_last_name_field,
-            data_fixture_js["dict_add_address"]["Last name:"]
+            data_fixture_js["dict_add_address"]["Last name:"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_address1_field,
-            data_fixture_js["dict_add_address"]["Street Address:"]
+            data_fixture_js["dict_add_address"]["Street Address:"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_address2_field,
-            data_fixture_js["dict_add_address"]["Secondary Address:"]
+            data_fixture_js["dict_add_address"]["Secondary Address:"],
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_city,
-            data_fixture_js["dict_add_address"]["City:"]
+            NAL.locator_city, data_fixture_js["dict_add_address"]["City:"]
         )
 
         new_address_page.select_dropdown_option(
-            NAL.locator_state,
-            data_fixture_js["dict_add_address"]["State:"]
+            NAL.locator_state, data_fixture_js["dict_add_address"]["State:"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_zip_code,
-            data_fixture_js["dict_add_address"]["Zip code:"]
+            NAL.locator_zip_code, data_fixture_js["dict_add_address"]["Zip code:"]
         )
 
-        new_address_page.select_state(
-            data_fixture_js["dict_add_address"]["Country:"]
-        )
+        new_address_page.select_state(data_fixture_js["dict_add_address"]["Country:"])
 
         new_address_page.set_data_to_field(
             NAL.locator_birthday,
-            converter.date_converter(
-                data_fixture_js["dict_add_address"]["Birthday:"]
-            )
+            converter.date_converter(data_fixture_js["dict_add_address"]["Birthday:"]),
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_color,
-            converter.rgb_to_hex(
-                data_fixture_js["dict_add_address"]["Color:"]
-            )
+            converter.rgb_to_hex(data_fixture_js["dict_add_address"]["Color:"]),
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_age,
-            data_fixture_js["dict_add_address"]["Age:"]
+            NAL.locator_age, data_fixture_js["dict_add_address"]["Age:"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_website,
-            data_fixture_js["dict_add_address"]["Website:"]
+            NAL.locator_website, data_fixture_js["dict_add_address"]["Website:"]
         )
 
-        new_address_page.find_element(NAL.locator_picture) \
-            .send_keys("C:\\123.png")
+        new_address_page.find_element(NAL.locator_picture).send_keys("C:\\123.png")
 
         new_address_page.set_data_to_field(
-            NAL.locator_phone,
-            data_fixture_js["dict_add_address"]["Phone:"]
+            NAL.locator_phone, data_fixture_js["dict_add_address"]["Phone:"]
         )
 
         new_address_page.click_on_element_if_yes(
-            NAL.locator_climbing,
-            data_fixture_js["dict_add_address"]["Climbing?"]
+            NAL.locator_climbing, data_fixture_js["dict_add_address"]["Climbing?"]
         )
 
         new_address_page.click_on_element_if_yes(
-            NAL.locator_dancing,
-            data_fixture_js["dict_add_address"]["Dancing?"]
+            NAL.locator_dancing, data_fixture_js["dict_add_address"]["Dancing?"]
         )
 
         new_address_page.click_on_element_if_yes(
-            NAL.locator_reading,
-            data_fixture_js["dict_add_address"]["Reading?"]
+            NAL.locator_reading, data_fixture_js["dict_add_address"]["Reading?"]
         )
 
         new_address_page.set_data_to_field(
-            NAL.locator_note,
-            data_fixture_js["dict_add_address"]["Note:"]
+            NAL.locator_note, data_fixture_js["dict_add_address"]["Note:"]
         )
 
         new_address_page.click_create_address_btn()
@@ -628,7 +550,9 @@ class TestDestroyAddress:
 
         addresses_list_page.click_ok_on_alert()
 
-        assert addresses_list_page.find_element(
-            ALL.locator_destroyed_message).text == "Address was successfully destroyed."
+        assert (
+            addresses_list_page.find_element(ALL.locator_destroyed_message).text
+            == "Address was successfully destroyed."
+        )
 
         common.click_sign_out()

@@ -19,7 +19,7 @@ class NewAddressLocators:
     locator_color = (By.NAME, "address[color]")
     locator_age = (By.NAME, "address[age]")
     locator_website = (By.NAME, "address[website]")
-    locator_picture = (By.ID, 'address_picture')
+    locator_picture = (By.ID, "address_picture")
     locator_phone = (By.NAME, "address[phone]")
     locator_climbing = (By.ID, "address_interest_climb")
     locator_dancing = (By.ID, "address_interest_dance")
@@ -32,9 +32,9 @@ class NewAddressLocators:
 class NewAddressPage(BasePage):
     def click_on_element_if_yes(self, locator, option):
         element = self.find_element(locator)
-        if option == 'Yes':
+        if option == "Yes":
             return element.click()
-        elif option == 'No':
+        elif option == "No":
             element.get_attribute("checked")
             if element.get_attribute("checked"):
                 element.click()
@@ -47,26 +47,18 @@ class NewAddressPage(BasePage):
         return self.find_element(field_locator).send_keys(data)
 
     def select_dropdown_option(self, dropdown_locator, value):
-        dropdown = Select(
-            self.find_element(dropdown_locator)
-        )
+        dropdown = Select(self.find_element(dropdown_locator))
         return dropdown.select_by_value(value)
 
     def select_element_by_locator(self, locator):
-        element = Select(
-            self.find_element(locator)
-        )
+        element = Select(self.find_element(locator))
         return element
 
     def select_state(self, state):
         if state == "us":
-            self.click_on_element(
-                NewAddressLocators.locator_address_country_us
-            )
+            self.click_on_element(NewAddressLocators.locator_address_country_us)
         elif state == "canada":
-            self.click_on_element(
-                NewAddressLocators.locator_address_country_canada
-            )
+            self.click_on_element(NewAddressLocators.locator_address_country_canada)
         else:
             pass
 
@@ -74,34 +66,55 @@ class NewAddressPage(BasePage):
         return self.find_element(locator).clear()
 
     def click_create_address_btn(self):
-        self.wait_until_element_clickable(
-            (By.NAME, "commit")
-        )
+        self.wait_until_element_clickable((By.NAME, "commit"))
 
-        create_address_btn = self.driver.find_element(
-            By.NAME, "commit"
-        )
+        create_address_btn = self.driver.find_element(By.NAME, "commit")
 
         create_address_btn.click()
 
-        self.find_element(
-            (By.CLASS_NAME, "container")
+        self.find_element((By.CLASS_NAME, "container"))
+
+    def provide_required_fields(self, data_json):
+        self.set_data_to_field(
+            NewAddressLocators.locator_first_name_field, data_json["first_name"]
         )
+
+        self.set_data_to_field(
+            NewAddressLocators.locator_last_name_field, data_json["last_name"]
+        )
+
+        self.set_data_to_field(
+            NewAddressLocators.locator_address1_field, data_json["address1"]
+        )
+
+        self.set_data_to_field(NewAddressLocators.locator_city, data_json["city"])
+
+        self.set_data_to_field(
+            NewAddressLocators.locator_zip_code, data_json["zip_code"]
+        )
+
+        self.click_on_element(NewAddressLocators.locator_create_address_btn)
+
+    def check_required_fields_error(self, message):
+        error_message = self.get_text_from_element(
+            NewAddressLocators.locator_required_fields_error
+        )
+        assert error_message == message
 
 
 class Converters:
     def hex_to_rgb(self, value):
-        value = value.lstrip('#')
+        value = value.lstrip("#")
         lv = len(value)
-        return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
+        return tuple(int(value[i : i + lv // 3], 16) for i in range(0, lv, lv // 3))
 
     def rgb_to_hex(self, rgb_str):
         rgb_tuple = self.str_to_tuple(rgb_str)
-        return '#%02x%02x%02x' % rgb_tuple
+        return "#%02x%02x%02x" % rgb_tuple
 
     def date_converter(self, date):
-        mm, dd, yyyy = date.split('/')
-        return f'{dd}/{mm}/{yyyy}'
+        mm, dd, yyyy = date.split("/")
+        return f"{dd}/{mm}/{yyyy}"
 
     def str_to_tuple(self, data):
         list_int_numbers = []

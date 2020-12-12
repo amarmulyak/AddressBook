@@ -8,5 +8,7 @@ class HomePageLocators:
 
 class HomePageSearchHelper(BasePage):
     def home_page_header(self):
-        return self.find_element(
-            HomePageLocators.locator_home_page_tittle, time=2).text
+        return self.find_element(HomePageLocators.locator_home_page_tittle, time=2).text
+
+    def check_home_page_header(self, message):
+        assert self.home_page_header() == message
