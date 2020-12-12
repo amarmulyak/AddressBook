@@ -10,4 +10,4 @@ RUN python3.8 --version
 RUN apt-get install python3-setuptools -y
 RUN apt-get install python3-pip -y
 RUN pip3 install -r requirements.txt
-CMD pytest -v -n auto --dist loadscope tests/
+CMD pytest -v -n auto --dist no new_test_suite/
