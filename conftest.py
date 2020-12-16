@@ -18,7 +18,14 @@ driver_path = get_driver_path()
 
 @pytest.fixture(scope="function")
 def browser_fixture():
-    driver = webdriver.Chrome(executable_path=driver_path)
+    driver = webdriver.remote.webdriver.WebDriver(
+        command_executor='http://127.0.0.1:4444/wd/hub',
+        desired_capabilities=None, browser_profile=None,
+        proxy=None,
+        keep_alive=False,
+        file_detector=None,
+        options=None
+    )
     yield driver
     driver.quit()
 
