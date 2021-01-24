@@ -1,16 +1,20 @@
 FROM debian:buster
 
 USER root
+
 RUN apt update
 RUN echo '**** Install Python 3.8 *****'
 RUN apt-get install -y wget
-CMD apt install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev
-CMD apt install -y libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev
+RUN apt install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev
+RUN apt install -y libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev
 
 RUN wget https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tgz
-CMD cd Python-3.8.2
+CMD cd Python-3.8.2/
 CMD ./configure --enable-optimizations
 CMD make altinstall
+
+COPY . addressbook
+WORKDIR addressbook
 
 RUN \
   apt update \
@@ -23,22 +27,6 @@ RUN \
   && pip3 install -U pytest \
   && echo 'Setting up xvfb ...' \
   && apt-get -y install xvfb
-
-# RUN \
-#   echo '**** Setup firefox **** ' \
-#   && apt-get remove iceweasel \
-#   && apt-get -y install apt-transport-https ca-certificates \
-#   && echo '\ndeb http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main' | tee -a /etc/apt/sources.list > /dev/null \
-#   && apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C1289A29 \
-#   && apt-get update \
-#   && apt-get install firefox-mozilla-build \
-#   && apt-get install -y libdbus-glib-1-2 \
-#   && apt-get install -y libgtk2.0-0 \
-#   && apt-get install -y libasound2
-
-RUN \
-  echo '**** Create test directory  **** ' \
-  && mkdir /usr/local/test
 
 RUN \
   apt-get install -y unzip libxi6 libgconf-2-4
@@ -53,18 +41,11 @@ RUN \
 RUN apt-get -y install -f && \
   apt-get -y install unzip
 
-RUN \
-  echo '**** Copy gecko & chromedriver ****'
+CMD chmod +x chromedriver
 
-# COPY geckodriver /usr/local/bin
-COPY chromedriver /usr/local/bin
+RUN pip3 install -r /addressbook/requirements.txt
 
 RUN \
-  echo '**** Copy tests ****'
-# COPY gecko_test.py /usr/local/test
-# COPY chrome_test_xfvb.py /usr/local/test
-# COPY chrome_test.py /usr/local/test
-COPY . addressbook
+  echo 'All went well Done! Executing tests'
 
-RUN \
-  echo 'All went well Done!'
+CMD pytest /addressbook/new_test_suite/test_home_page_header.py
