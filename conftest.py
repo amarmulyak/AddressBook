@@ -1,7 +1,7 @@
 import pytest
 import json
 from selenium import webdriver
-# from webdriverdownloader import ChromeDriverDownloader
+from webdriverdownloader import ChromeDriverDownloader
 from selenium.webdriver.chrome.options import Options
 from new_test_suite.test_helper import TestHelper
 import pathlib
@@ -9,13 +9,13 @@ import requests
 import platform
 
 
-# def get_driver_path():
-#     chrome_driver = ChromeDriverDownloader()
-#     path = chrome_driver.download_and_install()
-#     return path[0]
+def get_driver_path():
+    chrome_driver = ChromeDriverDownloader()
+    path = chrome_driver.download_and_install()
+    return path[0]
 
 
-# driver_path = get_driver_path()
+driver_path = get_driver_path()
 
 
 @pytest.fixture(scope="function")
@@ -27,8 +27,7 @@ def browser_fixture():
         chrome_options.add_argument('--no-sandbox')
         driver = webdriver.Chrome(executable_path=f"{cur_path}/chromedriver", chrome_options=chrome_options)
     else:
-        cur_path = pathlib.Path(__file__).parent
-        driver = webdriver.Chrome(executable_path=f"{cur_path}/chromedriver")
+        driver = webdriver.Chrome(executable_path=driver_path)
     yield driver
     driver.quit()
 
