@@ -2,9 +2,11 @@ import pytest
 import json
 from selenium import webdriver
 from webdriverdownloader import ChromeDriverDownloader
+from selenium.webdriver.chrome.options import Options
 from new_test_suite.test_helper import TestHelper
 import pathlib
 import requests
+import platform
 
 
 def get_driver_path():
@@ -18,14 +20,14 @@ driver_path = get_driver_path()
 
 @pytest.fixture(scope="function")
 def browser_fixture():
-    driver = webdriver.remote.webdriver.WebDriver(
-        command_executor='http://127.0.0.1:4444/wd/hub',
-        desired_capabilities=None, browser_profile=None,
-        proxy=None,
-        keep_alive=False,
-        file_detector=None,
-        options=None
-    )
+    if "debian-10" in platform.platform():
+        cur_path = pathlib.Path(__file__).parent
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument('--no-sandbox')
+        driver = webdriver.Chrome(executable_path=f"{cur_path}/chromedriver", chrome_options=chrome_options)
+    else:
+        driver = webdriver.Chrome(executable_path=driver_path)
     yield driver
     driver.quit()
 

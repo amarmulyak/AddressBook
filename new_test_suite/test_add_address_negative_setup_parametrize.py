@@ -12,7 +12,7 @@ class TestAddAddressNegative:
     @classmethod
     def setup_class(cls):
         cur_path = pathlib.Path(__file__).parent
-        cls.file = open(f"{cur_path}\\..\\test_input_data\\qa.json")
+        cls.file = open(f"{cur_path}/../test_input_data/qa.json")
         cls.data = [json.load(cls.file)]
         cls.data_gen = cls.data[0]["address_negative"]
         cls.driver = webdriver.Chrome(executable_path=driver_path)
