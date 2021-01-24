@@ -2,12 +2,15 @@ import pytest
 import json
 from selenium import webdriver
 from webdriverdownloader import ChromeDriverDownloader
+# from selenium.webdriver.chrome.options import Options
 from new_test_suite.test_helper import TestHelper
 import pathlib
 import requests
+# import platform
 
 
 def get_driver_path():
+    breakpoint()
     chrome_driver = ChromeDriverDownloader()
     path = chrome_driver.download_and_install()
     return path[0]
@@ -15,6 +18,21 @@ def get_driver_path():
 
 driver_path = get_driver_path()
 
+
+# @pytest.fixture(scope="function")
+# def browser_fixture():
+#     if "debian-10" in platform.platform():
+#         breakpoint()
+#         cur_path = pathlib.Path(__file__).parent
+#         chrome_options = Options()
+#         chrome_options.add_argument("--headless")
+#         chrome_options.add_argument('--no-sandbox')
+#         driver = webdriver.Chrome(executable_path=f"{cur_path}/chromedriver", chrome_options=chrome_options)
+#     else:
+#         breakpoint()
+#         driver = webdriver.Chrome(executable_path=driver_path)
+#     yield driver
+#     driver.quit()
 
 @pytest.fixture(scope="function")
 def browser_fixture():

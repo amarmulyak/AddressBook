@@ -12,6 +12,7 @@ idna==2.10
 iniconfig==1.0.1
 more-itertools==8.4.0
 MouseInfo==0.1.3
+pathlib
 packaging==20.4
 Pillow==7.2.0
 pip==20.1.1
