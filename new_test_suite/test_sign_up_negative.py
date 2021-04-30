@@ -44,7 +44,7 @@ class TestSignUpNegative:
         sign_up_page.provide_sign_up_credentials(sign_up_email, sign_up_password)
         sign_up_page.check_usrer_is_not_logged_in(sign_up_email)
 
-    @pytest.mark.xfail
+    # @pytest.mark.xfail
     @pytest.mark.parametrize(
         "test_input,expected",
         [
@@ -52,9 +52,10 @@ class TestSignUpNegative:
                 {"email": "mymaili.ua", "password": "123456"},  # email without @ sign
                 "Bad email or password.",
             ),
-            (
+            pytest.param(
                 {"email": "mymail@i", "password": "123456"},  # email without TLD
                 "Bad email or password.",
+                marks=pytest.mark.xfail
             ),
             (
                 {

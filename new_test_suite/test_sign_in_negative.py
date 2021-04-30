@@ -53,7 +53,6 @@ class TestSignInNegative:
         sign_in_page.check_error_message(expected)
         sign_in_page.check_usrer_is_not_logged_in(session_email)
 
-    @pytest.mark.xfail
     @pytest.mark.parametrize(
         "test_input,expected",
         [
@@ -61,9 +60,10 @@ class TestSignInNegative:
                 {"email": "mymaili.ua", "password": "123456"},  # email without @ sign
                 "Bad email or password.",
             ),
-            (
+            pytest.param(
                 {"email": "mymail@i", "password": "123456"},  # email without TLD
                 "Bad email or password.",
+                marks=pytest.mark.xfail
             ),
             (
                 {
