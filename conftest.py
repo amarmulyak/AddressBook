@@ -7,6 +7,7 @@ from new_test_suite.test_helper import TestHelper
 import pathlib
 import requests
 import platform
+from datetime import datetime
 
 
 def get_driver_path():
@@ -19,15 +20,16 @@ driver_path = get_driver_path()
 
 
 @pytest.fixture(scope="function")
-def browser_fixture():
+def browser_fixture(request):
+    cur_path = pathlib.Path(__file__).parent
     if "debian-10" in platform.platform():
-        cur_path = pathlib.Path(__file__).parent
         chrome_options = Options()
         chrome_options.add_argument("--headless")
         chrome_options.add_argument('--no-sandbox')
         driver = webdriver.Chrome(executable_path=f"{cur_path}/chromedriver", chrome_options=chrome_options)
     else:
-        driver = webdriver.Chrome(executable_path=driver_path)
+        # driver = webdriver.Chrome(executable_path=driver_path)
+        driver = webdriver.Chrome(executable_path=f"{cur_path}/chromedriver")
     yield driver
     driver.quit()
 
@@ -89,3 +91,28 @@ def pytest_generate_tests(metafunc):
             "data_gen",
             [data[0]["address_negative"]["p1"], data[0]["address_negative"]["p2"]],
         )
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    timestamp = datetime.now().strftime('%H-%M-%S')
+
+    pytest_html = item.config.pluginmanager.getplugin('html')
+    outcome = yield
+    report = outcome.get_result()
+    extra = getattr(report, 'extra', [])
+    if report.when == 'call':
+        feature_request = item.funcargs['request']
+        driver = feature_request.getfixturevalue("browser_fixture")
+        scr_name = f"scr_{timestamp}.png"
+        driver.save_screenshot(f'../pytest_report/{scr_name}')
+        extra.append(pytest_html.extras.image(f'../pytest_report/{scr_name}'))
+
+        # always add url to report
+        extra.append(pytest_html.extras.url('http://localhost:3000/'))
+        xfail = hasattr(report, 'wasxfail')
+        if (report.skipped and xfail) or (report.failed and not xfail):
+            # only add additional html on failure
+            extra.append(pytest_html.extras.image(f'../pytest_report/{scr_name}'))
+            extra.append(pytest_html.extras.html('<div>Additional HTML</div>'))
+        report.extra = extra
