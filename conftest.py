@@ -89,3 +89,8 @@ def pytest_generate_tests(metafunc):
             "data_gen",
             [data[0]["address_negative"]["p1"], data[0]["address_negative"]["p2"]],
         )
+
+
+def pytest_configure(config):
+    config.option.allure_report_dir = \
+        "/home/amarm/repositories/AddressBook/allure_result_folder"
