@@ -1,8 +1,10 @@
 from pages.show_address_object import ShowAddressPage
 from pages.addresses_list_object import AddressesListPage
 from pages.edit_address_object import EditAddressPage
+import pytest
 
 
+@pytest.mark.custom
 class TestCreateAddress:
     def test_create_address(
         self, add_address_fixture, browser_fixture, data_fixture_js
@@ -12,6 +14,7 @@ class TestCreateAddress:
         show_address_page.check_results_shown(data_fixture_js["dict_add_address"])
 
 
+@pytest.mark.custom
 class TestShowAddress:
     def test_show_address(self, add_address_fixture, browser_fixture, data_fixture_js):
         show_address_page = ShowAddressPage(browser_fixture)
@@ -21,6 +24,7 @@ class TestShowAddress:
         show_address_page.check_results_shown(data_fixture_js["dict_add_address"])
 
 
+@pytest.mark.new_m
 class TestEditAddress:
     def test_edit_address(self, add_address_fixture, browser_fixture, data_fixture_js):
         show_address_page = ShowAddressPage(browser_fixture)

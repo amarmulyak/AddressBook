@@ -92,5 +92,11 @@ def pytest_generate_tests(metafunc):
 
 
 def pytest_configure(config):
+    config.addinivalue_line(
+        "markers", "custom: custom marker")
+    config.addinivalue_line(
+        "markers", "new_m: custom marker 2")
+    config.addinivalue_line(
+        "addopts", "--strict")  # Should raise an error in case of unregistered marker. Doesn't work
     config.option.allure_report_dir = \
         "/home/amarm/repositories/AddressBook/allure_result_folder"
