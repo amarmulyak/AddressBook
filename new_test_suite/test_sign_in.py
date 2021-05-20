@@ -1,8 +1,10 @@
+import pytest
 from pages.sign_in_object import SignInSearchHelper
 from pages.sign_up_object import SignUpSearchHelper
 
 
 class TestSignInPage:
+    @pytest.mark.flaky(reruns=5)
     def test_sign_in_link_header(self, browser_fixture):
         sign_up_page = SignUpSearchHelper(browser_fixture)
         sign_in_page = SignInSearchHelper(browser_fixture)
