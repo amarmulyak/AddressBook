@@ -98,5 +98,9 @@ def pytest_configure(config):
         "markers", "new_m: custom marker 2")
     # config.addinivalue_line(
     #     "addopts", "--strict")  # Should raise an error in case of unregistered marker. Doesn't work
-    config.option.allure_report_dir = \
-        "/home/amarm/repositories/AddressBook/allure_result_folder"
+
+    allure_folder = pathlib.Path(__file__).parent / "allure_result_folder"
+    for item in allure_folder.iterdir():
+        if item.is_file():
+            item.unlink()
+    config.option.allure_report_dir = allure_folder
